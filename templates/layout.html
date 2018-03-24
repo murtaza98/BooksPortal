@@ -1,36 +1,20 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Untitled</title>
-    <link rel="stylesheet" href="layout_assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="layout_assets/css/styles.css">
-    <link rel="stylesheet" href="layout_assets/css/untitled.css">
+    <title>BooksPortal</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style type="text/css">
+        {% block style %}{% endblock %}
+    </style>
 </head>
-
 <body>
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header"><a class="navbar-brand navbar-link" href="#"><strong>Book</strong> </a>
-                <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-            </div>
-            <div class="collapse navbar-collapse" id="navcol-1">
-				<ul class="nav navbar-nav">
-                    <li class="active" role="presentation"><a href="#">Home </a></li>
-                    <li role="presentation"><a href="#">Second Item</a></li>
-                    <li role="presentation"><a href="#">About </a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li role="presentation"><a href="#">Login </a></li>
-                    <li role="presentation"><a href="#">Register </a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <script src="layout_assets/js/jquery.min.js"></script>
-    <script src="layout_assets/bootstrap/js/bootstrap.min.js"></script>
+    {% include 'includes/_navbar.html' %}
+    &nbsp
+    <div class="container">
+        {% include 'includes/_messages.html' %}
+        {% block body %}{% endblock %}
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.3.js"></script>
 </body>
-
 </html>

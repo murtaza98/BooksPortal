@@ -1,0 +1,116 @@
+{% extends 'layout.html' %}
+
+{% block style %}
+	body, html{
+     height: 100%;
+ 	background-repeat: no-repeat;
+ 	background-color: #d3d3d3;
+ 	font-family: 'Oxygen', sans-serif;
+}
+
+.main{
+ 	margin-top: 70px;
+}
+
+h1.title { 
+	font-size: 50px;
+	font-family: 'Passion One', cursive; 
+	font-weight: 400; 
+}
+
+hr{
+	width: 10%;
+	color: #fff;
+}
+
+.form-group{
+	margin-bottom: 15px;
+}
+
+label{
+	margin-bottom: 15px;
+}
+
+input,
+input::-webkit-input-placeholder {
+    font-size: 11px;
+    padding-top: 3px;
+}
+
+.main-login{
+ 	background-color: #fff;
+    /* shadows and rounded borders */
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+
+}
+
+.main-center{
+ 	margin-top: 30px;
+ 	margin: 0 auto;
+ 	max-width: 330px;
+    padding: 40px 40px;
+
+}
+
+.login-button{
+	margin-top: 5px;
+}
+
+.login-register{
+	font-size: 11px;
+	text-align: center;
+}
+{% endblock %}
+
+{% block body %}
+	{% from "includes/_formhelpers.html" import render_field %}
+
+	<div class="container">
+			<div class="row main">
+				<div class="panel-heading text-center">
+	               <div class="panel-title">
+	               		<h1 class="title">Register and be a Part of our Worldwide community</h1>
+	               		<hr />
+	               	</div>
+	            </div> 
+				<div class="main-login main-center">
+					<form class="form-horizontal" method="POST" action="">
+						
+						<div class="form-group">
+							<label for="name" class="cols-sm-2 control-label">Your</label>
+							{{render_field(form.name,class_='form-control')}}
+						</div>
+
+						<div class="form-group">
+							<label for="email" class="cols-sm-2 control-label">Your</label>
+							{{render_field(form.email,class_='form-control')}}
+						</div>
+
+						<div class="form-group">
+							{{render_field(form.username,class_='form-control')}}
+						</div>
+
+						<div class="form-group">
+							{{render_field(form.password,class_='form-control')}}
+						</div>
+
+						<div class="form-group">
+							{{render_field(form.confirm,class_='form-control')}}
+						</div>
+
+						<div class="form-group ">
+							<button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
+						</div>
+						<div class="login-register">
+				            <a href="index.php">Login</a>
+				         </div>
+					</form>
+				</div>
+			</div>
+		</div>	
+{% endblock %}
