@@ -19,6 +19,10 @@ mysql=MySQL(app)
 def home():
 	return render_template('home.html')
 
+@app.route('/about')
+def about():
+	return render_template('about.html')
+
 #register form class
 class RegisterForm(Form):
 	name=StringField('Name',[validators.Length(min=1,max=50)],render_kw={"placeholder": "Enter your Name"})
@@ -29,6 +33,16 @@ class RegisterForm(Form):
 		validators.EqualTo('confirm',message='Password do not match'),
 	],render_kw={"placeholder": "Enter your Password"})
 	confirm=PasswordField('Confirm Password',render_kw={"placeholder": "Confirm your Password"})
+
+def is_logged_in(f):
+	@wraps(f)
+	def wrap(*args,**kwargs):
+		if('logged_in' in session):
+			return f(*args,**kwargs)
+		else:
+			flash('Unauthorized, Please login','danger')
+			return redirect(url_for('login'))
+	return wrap
 
 
 @app.route('/register',methods=['GET','POST'])
@@ -46,11 +60,53 @@ def register():
 
 		flash('You are now registered and can LOG IN','success')
 
-		return redirect(url_for('register'))
+		return redirect(url_for('login'))
 
 	return render_template('register.html',form=form)
 
 
+@app.route('/login',methods=['GET','POST'])
+def login():
+	app.logger.info('reached here')
+	if(request.method=='POST'):
+		username=request.form['username']
+		password_candidate=request.form['password']
+
+		cur=mysql.connection.cursor()
+		result=cur.execute('SELECT * FROM users WHERE username= %s',[username])
+
+		if(result>0):
+			data=cur.fetchone()
+			password=data['password']
+
+			if(sha256_crypt.verify(password_candidate,password)):
+				app.logger.info('Password matched')
+
+				session['logged_in']=True
+				session['username']=username
+
+				flash('You are now logged in','success')
+
+				return redirect(url_for('dashboard'))
+			else:
+				error='Incorrect Password'
+				return render_template('login.html',error=error)
+		else:
+			error='No User with the specified username found'
+			return render_template("login.html",error=error)
+	return render_template('login.html')
+
+@app.route('/dashboard')
+@is_logged_in
+def dashboard():
+	return render_template('dashboard.html')
+
+@app.route('/logout')
+@is_logged_in
+def logout():
+	session.clear()
+	flash('You are now logged out','success')
+	return redirect(url_for('login'))
 
 
 
