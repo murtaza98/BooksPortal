@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block style %}
-	body, html{
+		body, html{
      height: 100%;
  	background-repeat: no-repeat;
  	background-color: #fff;
@@ -52,10 +52,9 @@ input::-webkit-input-placeholder {
 .main-center{
  	margin-top: 30px;
  	margin: 0 auto;
- 	max-width: 330px;
+ 	max-width: 700px;
     padding: 40px 40px;
     margin-bottom:5% 
-
 }
 
 .login-button{
@@ -66,52 +65,74 @@ input::-webkit-input-placeholder {
 	font-size: 11px;
 	text-align: center;
 }
+
+.btn-file {
+            position: relative;
+            overflow: hidden;
+        }
+         
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+        }
+
 {% endblock %}
+
 
 {% block body %}
 	{% from "includes/_formhelpers.html" import render_field %}
 
 	<div class="container">
 			<div class="row main">
-				<div class="panel-heading text-center">
-	               <div class="panel-title">
-	               		<h1 class="title">Register and be a Part of the Worldwide community</h1>
-	               		<hr />
-	               	</div>
-	            </div> 
-				<div class="main-login main-center">
-					<form class="form-horizontal" method="POST" action="">
+				<div class="main-login main-center col-lg-6">
+					<form class="form-horizontal" enctype=multipart/form-data method="POST" action="">
 						
 						<div class="form-group">
-							<label for="name" class="cols-sm-2 control-label">Your</label>
 							{{render_field(form.name,class_='form-control')}}
 						</div>
 
 						<div class="form-group">
-							<label for="email" class="cols-sm-2 control-label">Your</label>
-							{{render_field(form.email,class_='form-control')}}
+							{{render_field(form.price,class_='form-control')}}
 						</div>
 
 						<div class="form-group">
-							{{render_field(form.username,class_='form-control')}}
+							{{render_field(form.description,class_='form-control')}}
 						</div>
 
 						<div class="form-group">
-							{{render_field(form.password,class_='form-control')}}
+							{{render_field(form.stock,class_='form-control')}}
 						</div>
 
 						<div class="form-group">
-							{{render_field(form.confirm,class_='form-control')}}
+							{{render_field(form.category,class_='form-control')}}
 						</div>
 
+						<div class="form-group">
+                			<label for="txtPost"><b>Photos</b></label>
+                			<div class="input-group">
+                    			<span class="input-group-btn">
+                        			<input class="btn btn-primary btn-file" type="file" id="fileupload" name="image">
+                    			</span>
+                			</div>
+            			</div>
+            			
 						<div class="form-group ">
-							<button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
+							<button type="submit" class="btn btn-primary btn-lg btn-block">Publish</button>
 						</div>
-						<div class="login-register">
-				            <a href="login">Login</a>
-				         </div>
 					</form>
 				</div>
 			</div>
-		</div>	
+		</div>
+	
 {% endblock %}

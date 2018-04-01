@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block style %}
+#pro{
+	margin:5%;	
+	background-color:#fff;
+}
+#book_title{
+	margin-top:5%;	
+}	
+.img-thumbnail{
+	margin-top:5%;
+
+}
+
+
+	
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		Products
+	</div>
+	<div class="container">
+		<div class="row">
+			{% for product in products %}
+				<div class="col-sm-3">
+					<div id="pro" class="container">
+						<a href="product/{{product['id']}}">
+							<img src="../static/img/{{product['product_image']}}" class="img-thumbnail">
+						</a>						
+						<h5 id="book_title"><a href="product/{{product['id']}}">{{product['product_name']}}</a></h5>
+						<p id="book_price">Price:- {{product['product_price']}}</p>	
+					</div>	
+				</div>			
+			{% endfor %}
+		</div>		
+	</div>
+{% endblock %}

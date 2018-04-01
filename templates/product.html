@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block style %}
+	#pro{
+		display:flex;
+	}
+	.image{
+		max-width=50vh;
+		max-height:50vh;
+	}
+	#details{
+		margin-right:5px;
+		padding:25px;
+		border:1px solid #fff;
+	}
+{% endblock %}
+
+{% block body %}
+	<div id="pro" class="container">
+		<img src="../../static/img/{{product['product_image']}}" class="img-thumbnail image">
+		<div id=details style="border: 1 ">
+			<h3 id="book_title">{{product['product_name']}}</h3>
+			<p id="book_price">Price:- {{product['product_price']}}</p>	
+			<p>{{product['product_description']}}</p>
+		</div>						
+		
+	</div>
+{% endblock %}
